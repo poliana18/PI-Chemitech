@@ -1,0 +1,72 @@
+﻿@model Chemitech.Models.Bombona
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<h3 class="margen">Detalhes</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+
+            <div>
+
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Laboratorio.Nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Laboratorio.Nome)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Capacidade)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Capacidade)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DataInstalacao)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DataInstalacao)
+                    </dd>
+
+                </dl>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.ActionLink("Editar", "Edit", "Bombonas", new { id = Model.Id, @class = "btn-cadastrar" })
+
+                </div>
+                <div class="col-md-6">
+                    @Html.ActionLink("Voltar", "Index", "Bombonas", new { @class = "btn-cadastrar " })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div>
+                <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+            </div>
+
+        </div>
+
+    </div>
+</div>

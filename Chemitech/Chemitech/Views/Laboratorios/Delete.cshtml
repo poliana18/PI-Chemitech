@@ -1,0 +1,66 @@
+﻿@model Chemitech.Models.Laboratorio
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<h3 class="margen">Voce deseja mesmo deletar esse Laboratório?</h3>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EmpresaQuimico.NomeEmpresa)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EmpresaQuimico.NomeEmpresa)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Localizacao)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Localizacao)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="row">
+                        <div class="form-actions">
+                            <input type="submit" value="Delete" class="btn btn-default btn-cadastrar" />
+
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ActionLink("Voltar", "Index", "Laboratorios", new { @class = "btn-cadastrar botonMargim direita" })
+                        </div>
+                    </div>
+       }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+            </div>
+
+        </div>
+    </div>
+</div>

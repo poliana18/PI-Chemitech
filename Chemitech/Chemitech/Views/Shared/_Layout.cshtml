@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#navbarSite">
+            <img src="~/Imagens/icone principal.jpg" width="75" height="70" alt="">
+        </a>
+
+        <div class="navbar-collapse collapse" id="navbarSite">
+            <ul class="nav navbar-nav">
+
+                <li class="nav">
+                    @Html.ActionLink("Inicio", "Index", "Homepage", null, new { @class = " nav-link link" })
+                </li>
+                <li class="nav">
+                    @Html.ActionLink("Sobre nós", "About", "Homepage", null, new { @class = " nav-link link" })
+                </li>
+                <li class="nav">
+                    @Html.ActionLink("Contato", "Contat", "Homepage", null, new { @class = " nav-link link" })
+                </li>
+
+            </ul>
+        </div>
+        @if (ViewBag.Ocultar != "login")
+        {
+            <div class="navbar-right">
+                <div>
+                    @Html.ActionLink("Login ", "Login", "Homepage", null, new { @class = " my-class btn-cadastrar" })
+                </div>
+
+            </div>
+        }
+
+       
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @if (TempData["MSG"] != null)
+    {
+        <script>
+        $(document).ready(function () {
+            var titulo = "";
+            switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+            case "success":
+                titulo = "SUCESSO";
+                break;
+            case "warning":
+                titulo = "ATENÇÃO";
+                break;
+            case "error":
+                titulo = "ERRO";
+                break;
+            case "info":
+                titulo = "INFORMAÇÃO";
+                break;
+        }
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "6000",
+            "hideDuration": "6000",
+            "timeOut": "6000",
+            "extendedTimeOut": "6000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+      toastr["@TempData["MSG"].ToString().Split('|')[0]"]("@Html.Raw(TempData["MSG"].ToString().Split('|')[1])", titulo)
+      });
+        </script>
+    }
+
+  
+</body>
+</html>

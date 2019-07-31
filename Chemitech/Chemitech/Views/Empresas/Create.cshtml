@@ -1,0 +1,106 @@
+﻿@model Chemitech.Models.EmpresaQuimico
+
+@{
+    /**/
+
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+
+<h2 class="margen">Empresa química</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NomeEmpresa, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.NomeEmpresa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NomeEmpresa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cnpj, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control cnpj" } })
+                            @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-8" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control phone" } })
+                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RamoAtividadeId, "RamoAtividade", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 caixa">
+                            @Html.DropDownList("RamoAtividadeId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RamoAtividadeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Cadastrar" class="btn btn-default btn-cadastrar" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+    <script>
+        $('.cnpj').mask('00.000.000/0000-00')
+        $('.phone').mask('(99) 99999-9999');
+    </script>
+
+
+}

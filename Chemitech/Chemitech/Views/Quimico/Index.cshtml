@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Chemitech.Models.Laboratorio>
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutQuimico.cshtml";
+}
+
+<h2 class="margen">Dashboard</h2>
+
+<div class="container historico2">
+    <div class="row">
+        @{
+            foreach (var lab in Model)
+            {
+                <div class="card  borda3 mr-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@lab.Nome</h5>
+                        <a href="@Url.Action("Bombonas", "Quimico", new { id = lab.Id})" class="btn btn-primary">Visualizar bombonas</a>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+</div>
+<script src="~/Scripts/highcharts.js"></script>
+<script src="~/Scripts/highcharts-more.js"></script>
+<script src="~/Scripts/exporting.js"></script>
+
+<script src="~/Scripts/ScriptBombona.js">
+</script>
+

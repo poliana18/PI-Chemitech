@@ -1,0 +1,63 @@
+﻿@model Chemitech.Models.UsuarioQuimico
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<h3 class="margen">Detalhes</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div>
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    @*<dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>*@
+
+
+                </dl>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.ActionLink("Editar", "Edit", "UsuarioQuimicoes", new { id = Model.Id }, new { @class = "btn-cadastrar" })
+
+                </div>
+                <div class="col-md-6">
+                    @Html.ActionLink("Voltar", "Index", "UsuarioQuimicoes", new { @class = "btn-cadastrar" })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div>
+                <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+            </div>
+            
+        </div>
+    </div>
+</div>

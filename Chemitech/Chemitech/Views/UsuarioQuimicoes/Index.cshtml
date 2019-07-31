@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Chemitech.Models.UsuarioEmpresa>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<div class="container historico">
+
+    <div class="espaço1">
+        @Html.ActionLink("Cadastrar químico", "Create", "Usuarios", new { @class = "btn-cadastrar direito" })
+    </div>
+
+    <table class="table table-responsive table-borderless">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EmpresaQuimico.NomeEmpresa)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioQuimico.Nome)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioQuimico.Email)
+            </th>
+
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpresaQuimico.NomeEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioQuimico.Nome)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioQuimico.Email, new { @class = "emaiLine" })
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", "UsuarioQuimicoes", new { id = item.Id }, new { @class = "btn-cadastrar" })
+
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "Details", "UsuarioQuimicoes", new { id = item.Id }, new { @class = "btn-cadastrar" })
+            </td>
+            <td>
+                @Html.ActionLink("Deletar", "Delete", "UsuarioQuimicoes", new { id = item.Id }, new { @class = "btn-cadastrar" })
+            </td>
+        </tr>
+        }
+
+    </table>
+    
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(".status").click(function () {
+        var id = $(this).attr("rel");
+        $.ajax({
+            dataType: "json",
+            type: "POST",
+            url: "/Usuarios/AlterarStatus",
+            data: { id },
+            success: function (retorno) {
+                if (retorno == "t") {
+                    $(this).removeAttr('disabled');
+                }
+                else if (retorno == "f") {
+                    $(this).attr('disabled', 'disabled');
+                }
+                else {
+
+                }
+            }
+        });
+    });
+</script>

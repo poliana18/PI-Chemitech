@@ -1,0 +1,29 @@
+﻿@model Chemitech.Models.ListaEmpresa
+
+@{
+    ViewBag.Title = "MaisEmpresasQuimicas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="margen">Escolha a empresa</h2>
+
+<div class="container historico2">
+    <div class="row">
+        
+        @foreach (var emp in Model.usuarioEmpresas)
+        {
+            if (emp != null)
+            {
+                
+                <a href="@Url.Action("Index", "Quimico",new { id = emp.Id })" class="col-md-6 col-xs-6">
+                    <div class="borda2 ">
+                        @emp.NomeEmpresa
+                    </div>
+                </a>
+            }
+        }
+            
+    </div>
+</div>
+
+

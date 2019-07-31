@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Chemitech.Models.Laboratorio>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<div class="container historico">
+    <div class="espaço1">
+        @Html.ActionLink("Cadastrar Laboratórios", "Create", "Laboratorios", new { @class = "btn-cadastrar direito" })
+    </div>
+
+    <table class="table table-responsive table-borderless ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpresaQuimico.NomeEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Localizacao)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpresaQuimico.NomeEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Localizacao)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", "Laboratorios", new { id = item.Id }, new { @class = "btn-cadastrar" })
+
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Details", "Laboratorios", new { id = item.Id }, new { @class = "btn-cadastrar" })
+                </td>
+                <td>
+                    @Html.ActionLink("Deletar", "Delete", "Laboratorios", new { id = item.Id }, new { @class = "btn-cadastrar" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+</div>

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow cor-top">
+        <a class="navbar-brand" href="#navbarSite">
+            <img src="~/Imagens/imagemLayout.png" width="75" height="70" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite" aria-controls="navbarSite" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarSite">
+            <ul class="nav navbar-nav dropdown">
+
+                <li class="nav-item ">
+                    @Html.ActionLink("Laboratórios", "Index", "Quimico", new { id = ViewBag.EmpresaSelecionada }, new { @class = " my-class fa" })
+                </li>
+                <li class="nav-item ">
+                    @Html.ActionLink("Cadastrar resíduo", "CriarResiduo", "Quimico", new { id = ViewBag.EmpresaSelecionada }, new { @class = " my-class fa" })
+                </li>
+                <li class="nav-item ">
+                    @Html.ActionLink("Histórico de descarte", "HistoricoDescarte", "Quimico", new { id = ViewBag.EmpresaSelecionada }, new { @class = " my-class fa" })
+                </li>
+                <li class="nav-item ">
+                    @Html.ActionLink("Empresas trabalhadas", "MaisEmpresasQuimicas", "Quimico", new { id = ViewBag.Bombona }, new { @class = " my-class fa" })
+                </li>
+
+
+            </ul>
+
+        </div>
+
+        <div class="navbar-right mr-2">
+
+            <div class="nav-item dropdown">
+                <a class="nav-item dropdown-toggle my-class" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @HttpContext.Current.User.Identity.Name.ToString().Split('|')[0]
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @Html.ActionLink("Alterar senha", "RecuperarSenha", "Quimico", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("Sair", "Sair", "Homepage", null, new { @class = "dropdown-item" })
+                </div>
+            </div>
+
+
+        </div>
+
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @if (TempData["MSG"] != null)
+    {
+        <script>
+        $(document).ready(function () {
+            var titulo = "";
+            switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+            case "success":
+                titulo = "SUCESSO";
+                break;
+            case "warning":
+                titulo = "ATENÇÃO";
+                break;
+            case "error":
+                titulo = "ERRO";
+                break;
+            case "info":
+                titulo = "INFORMAÇÃO";
+                break;
+        }
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "6000",
+            "hideDuration": "6000",
+            "timeOut": "6000",
+            "extendedTimeOut": "6000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+      toastr["@TempData["MSG"].ToString().Split('|')[0]"]("@Html.Raw(TempData["MSG"].ToString().Split('|')[1])", titulo)
+      });
+        </script>
+    }
+
+
+
+
+</body>
+</html>

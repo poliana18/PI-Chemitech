@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Chemitech.Models.EmpresaQuimico>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<div class="container historico">
+
+    <div class="espaço1">
+        @Html.ActionLink("Cadastrar empresa quimica", "Create", "Empresas", new { @class = "btn-cadastrar direito" })
+    </div>
+
+    <table class="table table-responsive table-borderless">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RamoAtividade.NomeRamo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RamoAtividade.NomeRamo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", "Empresas", new { id = item.Id }, new { @class = "btn-cadastrar" })
+
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Details", "Empresas", new { id = item.Id }, new { @class = "btn-cadastrar" })
+                </td>
+                <td>
+                    @Html.ActionLink("Deletar", "Delete", "Empresas", new { id = item.Id }, new { @class = "btn-cadastrar" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    
+</div>

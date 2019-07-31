@@ -1,0 +1,205 @@
+﻿@model Chemitech.ViewModel.UsuarioEmpresaColeta
+
+@{
+    ViewBag.Title = "Cadastrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Empresa de coleta</h2>
+
+@using (Html.BeginForm("Cadastrar", "Homepage"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            <span class='msg'></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control txtpassword" } })
+                            @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                            <span class='result'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmaSenha, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ConfirmaSenha, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmaSenha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NomeEmpresa, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NomeEmpresa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NomeEmpresa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cnpj, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control cnpj" } })
+                            @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control phone" } })
+                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RamoAtividadeId, "Ramo Atividade", htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("RamoAtividadeId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RamoAtividadeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group direito">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Cadastrar" class="btn btn-default btn-cadastrar" onclick="javascript:return ValidateForm();" />
+                </div>
+            </div>
+
+            <div>
+                @Html.ActionLink("Voltar", "Index", "Homepage", new { @class = "btn-cadastrar botonMargim" })
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+    <script>
+        $('.cnpj').mask('00.000.000/0000-00')
+        $('.phone').mask('(99) 99999-9999');
+    </script>
+
+    <script>
+        $(".Email").focusout(function () {
+            var email = $(this).val();
+            $.ajax({
+                dataType: "json",
+                type: "POST",
+                url: "/Homepage/ValidarEmail",
+                data: { email },
+                success: function (retorno) {
+                    if (retorno == "s") {
+                        $(".botao").attr('disabled', 'disabled');
+                        $(".msg").text("E-mail já cadastrado");
+                        $(".msg").removeAttr("class");
+                        $(".msg").attr("class", "text-danger");
+                    }
+                    else {
+                        $(".botao").removeAttr("disabled");
+                        $(".msg").text("E-mail validado");
+                        $(".msg").removeAttr("class");
+                        $(".msg").attr("class", "text-success");
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/passwordStrengthMeter.js"></script>
+
+    <script language="javascript">
+        var result = "";
+        jQuery(document).ready(function () {
+            $('.txtpassword').keyup(function () {
+                $('.result').html(passwordStrength($('.txtpassword').val(), ""))
+                result = $('.result').html();
+                if (result == "Acrescenta letras maiúsculas e minúsculas") {
+                    $('.result').attr({ 'style': 'color:Red;' });
+                }
+                if (result == "Números e símbolos") {
+                    $('.result').attr({ 'style': 'color:Olive;' });
+                }
+                if (result == "Senha forte") {
+                    $('.result').attr({ 'style': 'color:Green;' });
+                }
+            })
+        })
+        function ValidateForm() {
+            if (result == "Boa" || result == "Senha forte") {
+                return true;
+            }
+            else {
+                TempData["MSG"] = "warning|A senha é fraca";
+                return false;
+            }
+        }
+    </script>
+
+}
+
+

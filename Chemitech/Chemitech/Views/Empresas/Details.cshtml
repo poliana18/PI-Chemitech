@@ -1,0 +1,89 @@
+﻿@model Chemitech.Models.EmpresaQuimico
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<h3 class="margen">Detalhes</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RamoAtividade.NomeRamo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RamoAtividade.NomeRamo)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NomeEmpresa)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NomeEmpresa)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cnpj)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Cnpj)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Endereco)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Endereco)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cidade)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Cidade)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Telefone)
+                    </dd>
+
+
+                </dl>
+            </div>
+
+
+            <div>
+                @Html.ActionLink("Editar", "Edit", "Empresas", new { id = Model.Id }, new { @class = "btn-cadastrar botonMargim direito" })
+
+            </div>
+            <div>
+                @Html.ActionLink("Voltar", "Index", "Empresas", new { @class = "btn-cadastrar botonMargim direita" })
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div>
+                <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+            </div>
+            
+        </div>
+
+    </div>
+</div>

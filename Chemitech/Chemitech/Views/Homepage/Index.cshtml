@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; ;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+
+        <div class="row margen">
+            <div class="col-md-5">
+                <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+            </div>
+
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1><b>Tecnologia aliada à segurança</b></h1>
+                        <hr align="left" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 espaço1"><p>Sistema intuitivo com o foco na orientaçao e gerenciamento dos descarte quimicos</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="espaço1">
+                            @Html.ActionLink("REGISTRE-SE GRATUITAMENTE", "Cadastrar", "Homepage", new { @class = "my-class u btn-cadastrar" })
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer id="footer">
+        <h7 class="copyright">Chemitech.</h7>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Chemitech.Models.Descarte>
+
+@{
+    ViewBag.Title = "HistoricoDescarte";
+    Layout = "~/Views/Shared/_LayoutQuimico.cshtml";
+}
+
+<h2>Historico</h2>
+<div class="container historico">
+    <table class="table table-responsive table-borderless">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bombona.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Residuo.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeAtual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bombona.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Residuo.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantidadeAtual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+
+            </tr>
+
+
+
+        }
+
+    </table>
+</div>

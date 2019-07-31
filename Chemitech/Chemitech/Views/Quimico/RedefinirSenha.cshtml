@@ -1,0 +1,82 @@
+﻿@model Chemitech.ViewModel.RedefinirSenha
+
+@{
+    ViewBag.Title = "RedefinirSenha";
+    Layout = "~/Views/Shared/_LayoutQuimico.cshtml";
+}
+
+<h2 class="margen">Alterar senha</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal rx-form-group">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control txtpassword" } })
+                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                <span class='result'></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmaSenha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmaSenha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmaSenha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Redefinir senha" class="btn btn-default btn-cadastrar" />
+            </div>
+        </div>
+    </div>
+
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/passwordStrengthMeter.js"></script>
+
+<script language="javascript">
+    var result = "";
+    jQuery(document).ready(function () {
+        $('.txtpassword').keyup(function () {
+            $('.result').html(passwordStrength($('.txtpassword').val(), ""))
+            result = $('.result').html();
+            if (result == "Acrescenta letras maiúsculas e minúsculas") {
+                $('.result').attr({ 'style': 'color:Red;' });
+            }
+            if (result == "Números e símbolos") {
+                $('.result').attr({ 'style': 'color:Olive;' });
+            }
+            if (result == "Senha forte") {
+                $('.result').attr({ 'style': 'color:Green;' });
+            }
+        })
+    })
+    function ValidateForm() {
+        if (result == "Boa" || result == "Senha forte") {
+            return true;
+        }
+        else {
+            TempData["MSG"] = "warning|A senha é fraca";
+            return false;
+        }
+    }
+</script>

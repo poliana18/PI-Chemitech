@@ -1,0 +1,93 @@
+﻿@model Chemitech.Models.EmpresaQuimico
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<h2 class="margen">Editar</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NomeEmpresa, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.NomeEmpresa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NomeEmpresa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cnpj, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-12 caixa">
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RamoAtividadeId, "RamoAtividade", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 caixa">
+                            @Html.DropDownList("RamoAtividadeId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RamoAtividadeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-6">
+                            <input type="submit" value="Salvar" class="btn btn-default btn-cadastrar" />
+                        </div>
+                        <div class="col-md-6">
+                            @Html.ActionLink("Voltar", "Index", "Empresas", new { @class = "btn-cadastrar botonMargim " })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img class="img" src="~/Imagens/ChemistrySet3.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

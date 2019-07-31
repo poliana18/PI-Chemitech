@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Chemitech.Models.Bombona>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEmpresaColeta.cshtml";
+}
+
+<div class="container historico">
+
+    <div class="espaço1">
+        @Html.ActionLink("Cadastrar Bombona", "Create", "Bombonas", new { @class = "btn-cadastrar direito " })
+    </div>
+
+    <table class="table table-responsive table-borderless">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Laboratorio.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInstalacao)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Laboratorio.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInstalacao)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", "Bombonas", new { id = item.Id }, new { @class = "btn-cadastrar" })
+
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Details", "Bombonas", new { id = item.Id }, new { @class = "btn-cadastrar" })
+                </td>
+                <td>
+                    @Html.ActionLink("Deletar", "Delete", "Bombonas", new { id = item.Id }, new { @class = "btn-cadastrar" })
+                </td>
+
+            </tr>
+
+
+
+        }
+
+    </table>
+
+    
+</div>

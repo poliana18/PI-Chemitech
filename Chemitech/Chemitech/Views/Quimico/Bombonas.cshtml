@@ -1,0 +1,351 @@
+﻿@model Chemitech.ViewModel.GerarGrafico
+
+@{
+    ViewBag.Title = "Bombonas";
+    Layout = "~/Views/Shared/_LayoutQuimico.cshtml";
+}
+
+<h2 class="margen">Bombonas</h2>
+
+<div class="container historico2">
+    <div class="row">
+
+        @{
+            <script src="~/Scripts/highcharts.js"></script>
+            <script src="~/Scripts/highcharts-more.js"></script>
+            <script src="~/Scripts/exporting.js"></script>
+
+            int id = 0;
+            int qtde = 0, capacidade = 0;
+            string nome = "", nomeresiduo = "", tipo = "", script = "", d2 = "";
+
+            foreach (var bon in Model.Bombona)
+            {
+                if (id != 0 && id != bon.Id)
+                {
+                    <div class="card  borda3 mr-5 " style="width: 18rem;background-color:#42bf94">
+                        <div class="card-body">
+                            <h5 class="card-title">@nome (@tipo)</h5>
+
+                            <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                <a href="@Url.Action("DescartarResiduo", "Quimico", new { id = id,ids = ViewBag.EmpresaSelecionada })" class="btn btn-success btn-lado">Descartar resíduo</a>
+                                <div data-toggle="modal" style="cursor:pointer" data-target="#ExemploModalCentralizado@(id)" class="btn btn-success btn-lado">Visualizar resíduos</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="ExemploModalCentralizado@(id)" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Falta(m) @(capacidade - qtde) de @capacidade
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="container@(id)" style="min-width: 410px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    ;
+
+                    script += @"<script>  Highcharts.chart('container" + id + @"', {
+
+                                                                                                                                                                             chart: {
+                                                                                                                                                                                 type: 'gauge',
+                                                                                                                                                                                 plotBackgroundColor: null,
+                                                                                                                                                                                 plotBackgroundImage: null,
+                                                                                                                                                                                 plotBorderWidth: 0,
+                                                                                                                                                                                 plotShadow: false
+                                                                                                                                                                             },
+
+                                                                                                                                                                             title: {
+                                                                                                                                                                                 text: '" + nome + @"', //'Nome da bombona'
+                                                                                                                                                                             },
+
+                                                                                                                                                                             pane: {
+                                                                                                                                                                                 startAngle: -150,
+                                                                                                                                                                                 endAngle: 150,
+                                                                                                                                                                                 background: [{
+                                                                                                                                                                                     backgroundColor: {
+                                                                                                                                                                                         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                                                                                                                                                                         stops: [
+                                                                                                                                                                                             [0, '#FFF'],
+                                                                                                                                                                                             [1, '#333']
+                                                                                                                                                                                         ]
+                                                                                                                                                                                     },
+                                                                                                                                                                                     borderWidth: 0,
+                                                                                                                                                                                     outerRadius: '109%'
+                                                                                                                                                                                 }, {
+                                                                                                                                                                                     backgroundColor: {
+                                                                                                                                                                                         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                                                                                                                                                                         stops: [
+                                                                                                                                                                                             [0, '#333'],
+                                                                                                                                                                                             [1, '#FFF']
+                                                                                                                                                                                         ]
+                                                                                                                                                                                     },
+                                                                                                                                                                                     borderWidth: 1,
+                                                                                                                                                                                     outerRadius: '107%'
+                                                                                                                                                                                 }, {
+                                                                                                                                                                                     // default background
+                                                                                                                                                                                 }, {
+                                                                                                                                                                                     backgroundColor: '#DDD',
+                                                                                                                                                                                     borderWidth: 0,
+                                                                                                                                                                                     outerRadius: '105%',
+                                                                                                                                                                                     innerRadius: '103%'
+                                                                                                                                                                                 }]
+                                                                                                                                                                             },
+
+                                                                                                                                                                             // the value axis
+                                                                                                                                                                             yAxis: {
+                                                                                                                                                                                 min: 0,
+                                                                                                                                                                                 max: parseInt(" + capacidade + @"), //500,// capacidade total da bombona
+
+                                                                                                                                                                                 minorTickInterval: 'auto',
+                                                                                                                                                                                 minorTickWidth: 1,
+                                                                                                                                                                                 minorTickLength: 10,
+                                                                                                                                                                                 minorTickPosition: 'inside',
+                                                                                                                                                                                 minorTickColor: '#666',
+
+                                                                                                                                                                                 tickPixelInterval: 30,
+                                                                                                                                                                                 tickWidth: 2,
+                                                                                                                                                                                 tickPosition: 'inside',
+                                                                                                                                                                                 tickLength: 10,
+                                                                                                                                                                                 tickColor: '#666',
+
+                                                                                                                                                                                 labels: {
+                                                                                                                                                                                     step: 2,
+                                                                                                                                                                                     rotation: 'auto'
+                                                                                                                                                                                 },
+                                                                                                                                                                                 title: {
+                                                                                                                                                                                     text: 'Capacidade'
+                                                                                                                                                                                 },
+                                                                                                                                                                                 plotBands: [{
+                                                                                                                                                                                     from: 0,
+                                                                                                                                                                                     to: 12000,
+                                                                                                                                                                                     color: ";
+                    double cap = capacidade - (capacidade * 0.20);
+                    string cor = qtde >= cap ? "#ff0000" : "#55bf3b"; // green
+                    script += "'" + cor + "'";
+                    script += @",      }] },";
+                    script += @"series: [{
+                                                                                                                                                                         name: 'Speed',
+                                                                                                                                                                         data: [" + qtde + @"], // valor do ponteiro - quantidade atual
+                                                                                                                                                                         center: [110, 90],
+                                                                                                                                                                         tooltip: {
+                                                                                                                                                                             valueSuffix: ' litros'
+                                                                                                                                                                         }
+                                                                                                                                                                     },
+                                                                                                                                                                     {
+                                                                                                                                                                         type: 'pie',
+                                                                                                                                                                         name: 'Total do resíduo',
+                                                                                                                                                                         data: [";
+
+                    script += d2;
+
+
+
+
+
+                    script += @"],
+                                                                                                                                                                                 center: [20, 20],
+                                                                                                                                                                                 size: 80,
+                                                                                                                                                                                 showInLegend: true,
+                                                                                                                                                                                 dataLabels: {
+                                                                                                                                                                                     enabled: false
+                                                                                                                                                                                 }
+                                                                                                                                                                             }]
+
+});</script>";
+                    qtde = 0;
+                    d2 = "";
+                    @Html.Raw(script)
+                    script = "";
+                    qtde = 0;
+                }
+
+                string da = "";
+                if (bon.Descartes.Count > 0)
+                {
+
+                    foreach (Chemitech.Models.Descarte d in bon.Descartes)
+                    {
+                        qtde += d.QuantidadeAtual;
+                        nomeresiduo += d.Residuo.Nome + "-" + d.QuantidadeAtual + "|";
+                        da += "{name:'" + d.Residuo.Nome + "', y:" + d.QuantidadeAtual + "},";
+
+                    }
+                }
+                else
+                {
+                    da += "{name:'Vazio', y:0},";
+                }
+
+                d2 = da.Substring(0, da.Length - 1);
+
+                id = bon.Id;
+                capacidade = Convert.ToInt32(bon.Capacidade);
+                nome = bon.Nome;
+                tipo = bon.tipo;
+            }
+            if (id != 0)
+            {
+                <div class="card  borda3 mr-5 " style="width: 18rem;background-color:#42bf94">
+                    <div class="card-body">
+                        <h5 class="card-title">@nome (@tipo)</h5>
+
+                        <div class="btn-group" role="group" aria-label="Exemplo básico">
+                            <a href="@Url.Action("DescartarResiduo", "Quimico", new { id = id,ids = ViewBag.EmpresaSelecionada })" class="btn btn-success btn-lado">Descartar resíduo</a>
+                            <div data-toggle="modal" style="cursor:pointer" data-target="#ExemploModalCentralizado@(id)" class="btn btn-success btn-lado">Visualizar resíduos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ExemploModalCentralizado@(id)" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="container@(id)" style="min-width: 410px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                ;
+
+                script += @"<script>  Highcharts.chart('container" + id + @"', {
+
+                                                                                                                                                                             chart: {
+                                                                                                                                                                                 type: 'gauge',
+                                                                                                                                                                                 plotBackgroundColor: null,
+                                                                                                                                                                                 plotBackgroundImage: null,
+                                                                                                                                                                                 plotBorderWidth: 0,
+                                                                                                                                                                                 plotShadow: false
+                                                                                                                                                                             },
+
+                                                                                                                                                                             title: {
+                                                                                                                                                                                 text: '" + nome + @"', //'Nome da bombona'
+                                                                                                                                                                             },
+
+                                                                                                                                                                             pane: {
+                                                                                                                                                                                 startAngle: -150,
+                                                                                                                                                                                 endAngle: 150,
+                                                                                                                                                                                 background: [{
+                                                                                                                                                                                     backgroundColor: {
+                                                                                                                                                                                         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                                                                                                                                                                         stops: [
+                                                                                                                                                                                             [0, '#FFF'],
+                                                                                                                                                                                             [1, '#333']
+                                                                                                                                                                                         ]
+                                                                                                                                                                                     },
+                                                                                                                                                                                     borderWidth: 0,
+                                                                                                                                                                                     outerRadius: '109%'
+                                                                                                                                                                                 }, {
+                                                                                                                                                                                     backgroundColor: {
+                                                                                                                                                                                         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                                                                                                                                                                         stops: [
+                                                                                                                                                                                             [0, '#333'],
+                                                                                                                                                                                             [1, '#FFF']
+                                                                                                                                                                                         ]
+                                                                                                                                                                                     },
+                                                                                                                                                                                     borderWidth: 1,
+                                                                                                                                                                                     outerRadius: '107%'
+                                                                                                                                                                                 }, {
+                                                                                                                                                                                     // default background
+                                                                                                                                                                                 }, {
+                                                                                                                                                                                     backgroundColor: '#DDD',
+                                                                                                                                                                                     borderWidth: 0,
+                                                                                                                                                                                     outerRadius: '105%',
+                                                                                                                                                                                     innerRadius: '103%'
+                                                                                                                                                                                 }]
+                                                                                                                                                                             },
+
+                                                                                                                                                                             // the value axis
+                                                                                                                                                                             yAxis: {
+                                                                                                                                                                                 min: 0,
+                                                                                                                                                                                 max: parseInt(" + capacidade + @"), //500,// capacidade total da bombona
+
+                                                                                                                                                                                 minorTickInterval: 'auto',
+                                                                                                                                                                                 minorTickWidth: 1,
+                                                                                                                                                                                 minorTickLength: 10,
+                                                                                                                                                                                 minorTickPosition: 'inside',
+                                                                                                                                                                                 minorTickColor: '#666',
+
+                                                                                                                                                                                 tickPixelInterval: 30,
+                                                                                                                                                                                 tickWidth: 2,
+                                                                                                                                                                                 tickPosition: 'inside',
+                                                                                                                                                                                 tickLength: 10,
+                                                                                                                                                                                 tickColor: '#666',
+
+                                                                                                                                                                                 labels: {
+                                                                                                                                                                                     step: 2,
+                                                                                                                                                                                     rotation: 'auto'
+                                                                                                                                                                                 },
+                                                                                                                                                                                 title: {
+                                                                                                                                                                                     text: 'Capacidade'
+                                                                                                                                                                                 },
+                                                                                                                                                                                 plotBands: [{
+                                                                                                                                                                                     from: 0,
+                                                                                                                                                                                     to: 12000,
+                                                                                                                                                                                     color: ";
+                double cap = capacidade - (capacidade * 0.20);
+                string cor = qtde >= cap ? "#ff0000" : "#55bf3b"; // green
+                script += "'" + cor + "'";
+                script += @",      }] },";
+                script += @"series: [{
+                                                                                                                                                                         name: 'Speed',
+                                                                                                                                                                         data: [" + qtde + @"], // valor do ponteiro - quantidade atual
+                                                                                                                                                                         center: [110, 90],
+                                                                                                                                                                         tooltip: {
+                                                                                                                                                                             valueSuffix: ' litros'
+                                                                                                                                                                         }
+                                                                                                                                                                     },
+                                                                                                                                                                     {
+                                                                                                                                                                         type: 'pie',
+                                                                                                                                                                         name: 'Total do resíduo',
+                                                                                                                                                                         data: [";
+
+                script += d2;
+
+
+
+
+
+                script += @"],
+                                                                                                                                                                                 center: [20, 20],
+                                                                                                                                                                                 size: 80,
+                                                                                                                                                                                 showInLegend: true,
+                                                                                                                                                                                 dataLabels: {
+                                                                                                                                                                                     enabled: false
+                                                                                                                                                                                 }
+                                                                                                                                                                             }]
+
+});</script>";
+                qtde = 0;
+                d2 = "";
+                @Html.Raw(script)
+                script = "";
+
+            }
+        }
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/bootstrap")
+
+
+
+        <script src="~/Scripts/ScriptBombona.js">
+        </script>
+    </div>
+</div>
+
